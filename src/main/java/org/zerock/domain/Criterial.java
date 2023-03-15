@@ -1,5 +1,7 @@
 package org.zerock.domain;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 import lombok.Data;
 
 @Data
@@ -25,4 +27,18 @@ public class Criterial {
 		//타입이 null이면 빈 문자열 생성, null이 아니면 
 		
 	}
+	
+	public String getListLink() {
+		//UriComponentsBuilder는 브라우저에서 get방식 등의 파라미터 전송에 사용되는 문자열을
+		//손쉽게 처리할 수 있는 클래스
+		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
+				.queryParam("pageNum", this.pageNum)
+				.queryParam("amount", this.getAmount())
+				.queryParam("type", this.getType())
+				.queryParam("keyword", this.getKeyword());
+
+		return builder.toUriString();
+
+	}
+	
 }
